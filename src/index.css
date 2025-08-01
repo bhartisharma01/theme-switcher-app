@@ -6,34 +6,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 :root {
-  --bg: 255 255 255;
-  --text: 17 24 39;
-  --font-family: theme(fontFamily.sans);
+    --bg: 255 255 255;
+    --text: 17 24 39;
+    --font-family: theme(fontFamily.sans);
 }
 
 .theme2 {
-  --bg: 17 24 39;
-  --text: 255 255 255;
-  --font-family: theme(fontFamily.serif);
+    --bg: 17 24 39;
+    --text: 255 255 255;
+    --font-family: theme(fontFamily.serif);
 }
 
 .theme3 {
-  --bg: 253 242 248;
-  --text: 131 24 67;
-  --font-family: 'Pacifico', cursive;
+    --bg: 253 242 248;
+    --text: 131 24 67;
+    --font-family: 'Pacifico', cursive;
 }
 
 @layer base {
-  body {
-    background-color: rgb(var(--bg));
-    color: rgb(var(--text));
-    font-family: var(--font-family);
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  }
-  select {
-    background-color: rgb(var(--bg));
-    color: rgb(var(--text));
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    border-color: rgb(var(--text));
-  }
+    body {
+        background-color: rgb(var(--bg));
+        color: rgb(var(--text));
+        font-family: var(--font-family);
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    select {
+        background-color: rgb(var(--bg));
+        color: rgb(var(--text));
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        border-color: rgb(var(--text));
+    }
 }

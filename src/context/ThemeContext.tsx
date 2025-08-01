@@ -8,12 +8,12 @@ interface ThemeContextType {
 }
 export const ThemeContext = createContext<ThemeContextType>({
   themeMode: "theme1",
-  setTheme: () => {},
+  setTheme: () => { },
 
 })
 
 export const ThemeProvider = ThemeContext.Provider
 
-export default function useTheme(){
+export default function useTheme() {
   return useContext(ThemeContext)
 }

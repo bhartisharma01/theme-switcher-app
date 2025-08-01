@@ -21,37 +21,27 @@ function App() {
     localStorage.setItem("theme", theme);
   };
 
- useEffect(() => {
-  const html = document.querySelector("html");
-  html?.classList.remove("theme1", "theme2", "theme3");
-  html?.classList.add(themeMode);
-}, [themeMode]);
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html?.classList.remove("theme1", "theme2", "theme3");
+    html?.classList.add(themeMode);
+  }, [themeMode]);
   return (
     <>
-      {/* <BrowserRouter>
-        <Header />
-        <div>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About/>}/>
-            <Route path='/contact' element={<Contact/>}/>
-          </Routes>
+      <ThemeProvider value={{ themeMode, setTheme }}>
+        <div className="min-h-screen transition-colors duration-300 ease-in-out">
+          <BrowserRouter>
+            <Header />
+            <div className="p-4">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
         </div>
-      </BrowserRouter> */}
-       <ThemeProvider value={{ themeMode, setTheme }}>
-      <div className="min-h-screen transition-colors duration-300 ease-in-out">
-        <BrowserRouter>
-          <Header />
-          <div className="p-4">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
 
     </>
   )
