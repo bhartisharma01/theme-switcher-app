@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import {Header} from './components/Header'
+import { Header } from './components/Header'
 import { Home } from './pages/Home'
 import { About } from './pages/About'
 import { Contact } from './pages/Contact'
@@ -9,24 +9,23 @@ import { ThemeProvider } from './context/ThemeContext'
 import { useEffect, useState } from 'react'
 
 function App() {
+  type Theme = "theme1" | "theme2" | "theme3";
 
-  const [themeMode, setThemeMode] = useState("light");
-  const lightTheme = () => {
-    setThemeMode("light");
-  }
-  const darkTheme = () => {
-    setThemeMode("dark");
-  }
-  const toggleTheme = ()=>{
-    console.log("set toggle theme")
-  }
+  const [themeMode, setThemeMode] = useState<Theme>(() => {
+    return (localStorage.getItem("theme") as Theme) || "theme1";
+  });
 
-  // actual theme change
 
-  useEffect(() => {
-    document.querySelector('html')?.classList.remove("light", "dark");
-    document.querySelector('html')?.classList.add(themeMode);
-  }, [themeMode])
+  const setTheme = (theme: Theme) => {
+    setThemeMode(theme);
+    localStorage.setItem("theme", theme);
+  };
+
+ useEffect(() => {
+  const html = document.querySelector("html");
+  html?.classList.remove("theme1", "theme2", "theme3");
+  html?.classList.add(themeMode);
+}, [themeMode]);
   return (
     <>
       {/* <BrowserRouter>
@@ -39,19 +38,20 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter> */}
-      <ThemeProvider value={{ themeMode, lightTheme, darkTheme, toggleTheme }}>
-        <div className="flex flex-wrap min-h-screen items-center">
-          <div className="w-full">
-            <div className="w-full max-w-sm mx-auto flex justify-end mb-4">
-              <Header />
-            </div>
-
-            <div className="w-full max-w-sm mx-auto">
-              <Home />
-            </div>
+       <ThemeProvider value={{ themeMode, setTheme }}>
+      <div className="min-h-screen transition-colors duration-300 ease-in-out">
+        <BrowserRouter>
+          <Header />
+          <div className="p-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
           </div>
-        </div>
-      </ThemeProvider>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
 
     </>
   )
