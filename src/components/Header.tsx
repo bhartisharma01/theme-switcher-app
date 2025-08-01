@@ -1,26 +1,31 @@
-import { useTheme } from '../context/ThemeContext';
-import { Link } from 'react-router-dom';
+import useTheme from "../context/ThemeContext";
 
-const Header = () => {
-  const { theme, setTheme } = useTheme();
+
+export const Header = () => {
+const {themeMode, lightTheme, darkTheme, toggleTheme}= useTheme()
+  const onChangeBtn = (e:any)=>{
+    const darkModeStatus = e.currentTarget.checked;
+    if(darkModeStatus)
+      darkTheme()
+    else
+      lightTheme()
+  }
 
   return (
-    <header className="fixed w-full p-4 bg-gray-200 dark:bg-gray-800 flex justify-between items-center z-50 shadow-md">
-      <Link to="/" className="text-lg font-bold">Theme App</Link>
-      
-      <select
-        value={theme}
-        onChange={(e) => setTheme(e.target.value as any)}
-        className="p-2 rounded"
-      >
-        <option value="theme1">Theme 1 - Minimal</option>
-        <option value="theme2">Theme 2 - Dark Sidebar</option>
-        <option value="theme3">Theme 3 - Playful</option>
-      </select>
-
-      
-    </header>
+    <>
+      <label className="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          value=""
+          className="sr-only peer"
+          onChange={onChangeBtn}
+          checked={themeMode === "dark"}
+        />
+        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+        <span className="ml-3 text-sm font-medium text-gray-900">Toggle Theme</span>
+      </label>
+    </>
   );
 };
 
-export default Header;
+
